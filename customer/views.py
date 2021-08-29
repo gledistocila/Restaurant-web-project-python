@@ -4,7 +4,7 @@ from django.views import View
 from django.db.models import Q
 from django.core.mail import send_mail
 from .models import MenuItem, Category, OrderModel
-
+from django.core.files.storage import FileSystemStorage
 
 class Index(View):
     def get(self, request, *args, **kwargs):
@@ -36,6 +36,8 @@ class Order(View):
         # render the template
         return render(request, 'customer/order.html', context)
 
+
+
     def post(self, request, *args, **kwargs):
         name = request.POST.get('name')
         email = request.POST.get('email')
@@ -43,6 +45,11 @@ class Order(View):
         city = request.POST.get('city')
         state = request.POST.get('state')
         zip_code = request.POST.get('zip')
+        myfile = request.FILES.get('docfile')
+                                                               # fs = FileSystemStorage()
+                                                               # filename = fs.save(myfile.name, myfile)
+                                                               # uploaded_file_url = fs.url(filename)
+
 
         order_items = {
             'items': []
@@ -74,7 +81,8 @@ class Order(View):
             street=street,
             city=city,
             state=state,
-            zip_code=zip_code
+            zip_code=zip_code,
+            myfile=myfile
         )
         order.items.add(*item_ids)
 
@@ -153,3 +161,4 @@ class MenuSearch(View):
         }
 
         return render(request, 'customer/menu.html', context)
+
