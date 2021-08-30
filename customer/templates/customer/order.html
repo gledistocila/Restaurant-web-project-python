@@ -4,7 +4,7 @@
 <div class="container mb-5">
     <div class="row justify-content-center mt-1">
         <div class="col-md-12 col-sm-12 p-4">
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="pt-5">
                     {% for app in appetizers %}
@@ -129,7 +129,8 @@
 
                     <div class="col-md-4 col-sm-12">
                         <div class="form-group pt-3">
-                            <input type="file" name="docfile" />
+                                 <label for="name" class="form-label">Image</label>
+                                 <input type="file" name="upload" accept=".doc, .docx, .pdf, .txt, .jpg, .png" class="form-control">
                         </div>
                     </div>
                 </div>

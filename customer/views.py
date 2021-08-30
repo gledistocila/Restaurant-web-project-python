@@ -10,7 +10,6 @@ class Index(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'customer/index.html')
 
-
 class About(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'customer/about.html')
@@ -45,11 +44,10 @@ class Order(View):
         city = request.POST.get('city')
         state = request.POST.get('state')
         zip_code = request.POST.get('zip')
-        myfile = request.FILES.get('docfile')
-                                                               # fs = FileSystemStorage()
-                                                               # filename = fs.save(myfile.name, myfile)
-                                                               # uploaded_file_url = fs.url(filename)
-
+        upload = request.FILES.get('upload')
+        fss = FileSystemStorage()
+        file = fss.save(upload.name, upload)
+        file_url = fss.url(file)
 
         order_items = {
             'items': []
@@ -82,7 +80,7 @@ class Order(View):
             city=city,
             state=state,
             zip_code=zip_code,
-            myfile=myfile
+            upload=upload
         )
         order.items.add(*item_ids)
 

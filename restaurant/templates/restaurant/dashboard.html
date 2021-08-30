@@ -29,6 +29,7 @@
                             <th scope="col">Zip Code</th>
                             <th scope="col">Is Paid?</th>
                             <th scope="col">Details</th>
+                            <th>Image</th>
                         </tr>
                     </thead>
 
@@ -52,6 +53,18 @@
 
                             </td>
                             <td><a href="{% url 'order-details' order.pk %}"><i class="far fa-edit"></i></a></td>
+                            {% if order.image %}
+                                            <td>
+                                                <img src="{{ order.image.url }}" alt="" class="prod-size">
+                                            </td>
+                                        {% else %}
+                                            <td>
+                                                 {% if file_url %}
+                                                <img src="{{ file_url }}" class="img-fluid">
+                                                {% endif %}
+                                            </td>
+                                        {% endif %}
+
                         </tr>
                         {% endfor %}
                     </tbody>
