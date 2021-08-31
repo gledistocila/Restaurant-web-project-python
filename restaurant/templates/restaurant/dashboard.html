@@ -12,6 +12,23 @@
                 <h4 class="text-center pt-2">Today's Total Orders</h4>
                 <h1 class="text-center" style="color: #ad0003;">{{ total_orders }}</h1>
             </div>
+
+            <div class="card col-md-5 mr-3">
+                <h4 class="text-center pt-2">Delete recent files</h4>
+                <h1><form method="post" action="{% url 'delete_image' %}">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form></h1>
+            </div>
+
+            <div class="card col-md-5 mr-3">
+                <h4 class="text-center pt-2">Total Size of Saved Files</h4>
+                {% if total_size > 10 %}
+                <h1 class="text-center" style="color: #ad0003;">The total size of stored files is bigger than 10 bytes.</h1>
+                {% else %}
+                <h1 class="text-center" style="color: #ad0003;">The total size of stored files is not bigger than 10 bytes.</h1>
+                {% endif %}
+            </div>
         </div>
 
         <div class="row justify-content-center">

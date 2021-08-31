@@ -1,4 +1,8 @@
 import json
+import os
+import shutil
+import time
+import pathlib
 from django.shortcuts import render, redirect
 from django.views import View
 from django.db.models import Q
@@ -13,7 +17,6 @@ class Index(View):
 class About(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'customer/about.html')
-
 
 class Order(View):
     def get(self, request, *args, **kwargs):
@@ -34,8 +37,6 @@ class Order(View):
 
         # render the template
         return render(request, 'customer/order.html', context)
-
-
 
     def post(self, request, *args, **kwargs):
         name = request.POST.get('name')
